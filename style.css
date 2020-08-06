@@ -8,16 +8,17 @@
 body{
   display: flex;
   height: 100vh;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /* INSTRUCTIONS */
 
 .intructions{
-  padding-top: 10%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  justify-content: center;
 }
 
 .intructions > img{
@@ -29,6 +30,7 @@ body{
 
 .intructions > p{
   margin: 0 24px;
+  font-size: 16px;
   margin-top: 8px;
   color: #333;
 }
@@ -37,51 +39,81 @@ body{
 
 /* SEARCH AREA */
 .search-area{
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #333;
+  padding: 32px;
   justify-content: center;
-  padding: 16px;
   box-shadow: 3px 6px 6px #00000030;
 }
 
-.search-area > button{
+.logo-area{
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.logo-area > svg{
+  color: #fff;
+  height: 40px;
+  width: 40px;
+  margin-right: 16px;
+}
+
+.logo-area h4{
+  white-space: nowrap; 
+  margin: 0;
+  font-size: 28px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+form > button{
   margin-top: 8px;
   border: 1px solid #fff;
   color: #fff;
   background: none;
   width: calc(100% - 2px);
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 0px 16px;
+  height: 40px;
   border-radius: 4px;
 }
 
-.search-area > button:hover{
+form > button:hover{
   background: #fff;
   color: #333;
   transition: background 0.3s ease;
 }
 
-.search-area > svg{
-  color: #fff;
-}
-
-.search-bar{
+.search-bar {
+  width: 100%;
   margin-top: 16px;
   border-radius: 4px;
   background: #24292e;
-  padding: 8px;
+  padding: 0 16px;
+  height: 40px;
   border: none;
   color: #fff;
+}
+
+.error{
+  border: 1px solid red;
+}
+
+.error::placeholder{
+  color: red;
 }
 /* --- */
 
 
 /* RESULT AREA */
 .result-area{
-  padding-top: 10%;
-  width: 100%;
+  flex: 1;
+  justify-content: center;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -125,3 +157,33 @@ body{
   margin: 0 8px;
 }
 
+.loader-content{
+  display: none;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader{
+  font-size: 120px;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.api-error-message{
+  position: fixed;
+  top: 0;
+  right: 0;
+  border-radius: 8px;
+  display: flex;
+  padding: 24px;
+  background: red;
+  margin: 24px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0;
+  
+  transition: opacity 1s;
+}
