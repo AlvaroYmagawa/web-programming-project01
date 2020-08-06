@@ -1,17 +1,25 @@
 function fetchGithubUser(userName){
   handleLoader(true);
 
-  axios.get(`https://api.github.com/users/${userName}`)
-  .then(response => {
-    user = response.data;
-    
-    handleLoader(false);
-    fillData();
-  })
-  .catch(error => {
-    fillError(error);
-    handleLoader(false);
-  })
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // Convert response to JSON
+      const user = JSON.parse(this.responseText);
+      
+      handleLoader(false);
+      fillUser(user);
+    }
+
+    if(this.status !== 200){
+      const error = JSON.parse(this.responseText);
+
+      fillError(error);
+      handleLoader(false);
+    }
+  };
+  xhttp.open("GET", `https://api.github.com/users/${userName}`, true);
+  xhttp.send();
 }
 
 // This function return true if a string has at least one character
@@ -68,7 +76,7 @@ function handleLoader(visibility){
 function fillError(error){
   const toastError = document.querySelector('.api-error-message');
 
-  toastError.innerHTML = error.response.data.message;
+  toastError.innerHTML = error.message;
   toastError.style.opacity = 1;
 
   setTimeout(() => {
@@ -76,7 +84,7 @@ function fillError(error){
   }, 5000);
 }
 
-function fillData(){
+function fillUser(user){
   const {resultArea, intructions, avatar, name, bio, repos, followers} = constructor();
 
   resultArea.style.display = "flex";
